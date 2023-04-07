@@ -11,6 +11,7 @@
 #include "ReadyScene.h"
 #include "GameScene.h"
 #include "Actor.h"
+#include "ScrollSpriteComponent.h"
 
 std::vector<int> inputkeyboard{0, 0};
 std::vector<Ball> ball_structs;
@@ -66,7 +67,19 @@ void Game::InitScene()
 {
 	// 背景の作成
 	// 背景をスクロールさせる処理
+	auto* bgBack = new Actor(this);
+	bgBack->SetPosition(Vector2(ScreenWidth / 2, ScreenHeight / 2));
+	auto* bgBackSprite = new ScrollSpriteComponent(bgBack, 10);
+	bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "bubble.png"));
+	bgBackSprite->SetScrollSpeedY(100.0f); // 速度：100
 
+	/*
+	auto* bgFront = new Actor(this);
+	bgFront->SetPosition(Vector2(ScreenWidth / 2, ScreenHeight / 2));
+	auto* bgFrontSprite = new ScrollSpriteComponent(bgFront, 20);
+	bgFrontSprite->SetTexture(LoadTexture(GetAssetsPath() + "bubble.png"));
+	bgFrontSprite->SetScrollSpeedY(200.0f); // 速度：200
+	*/
 }
 
 void Game::RunLoop() {
@@ -316,7 +329,7 @@ void Game::GenerateOutput() {
 	// 描画色を青色に設定
 	SDL_SetRenderDrawColor(
 		mRenderer,
-		0, 0, 100, 255 // (R,G,B,A)
+		0, 176, 255, 255 // (R,G,B,A)
 	);
 
 	// バックバッファを青色で塗りつぶす
@@ -366,18 +379,6 @@ void Game::GenerateOutput() {
 		SDL_RenderFillRect(mRenderer, &ball);
 	}
 	*/
-
-	// バックバッファとフロントバッファを入れ替え
-	SDL_RenderPresent(mRenderer);
-}
-
-void Game::GenerateOutput2() {
-
-	// 描画色を虹色に設定
-	SDL_SetRenderDrawColor(mRenderer, rand() % 255, rand() % 255, rand() % 255, rand() % 255);
-
-	// バックバッファを青色で塗りつぶす
-	SDL_RenderClear(mRenderer);
 
 	// バックバッファとフロントバッファを入れ替え
 	SDL_RenderPresent(mRenderer);

@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <string>
 #include "SDL.h"
+#include "Scene.h"
 
 class Game {
 public:
@@ -33,10 +34,8 @@ private:
 	void InitScene();      // シーン初期化処理
 	void StartScene();     // シーン開始処理
 	void UpdateScene();    // シーン更新処理
-	void ProcessInput();   // 入力検知
-	void UpdateGame();     
+	void ProcessInput();   // 入力検知 
 	void GenerateOutput(); // 出力処理
-	void GenerateOutput2();
 
 	class Scene* mScene;     // 現在のシーン
 	class Scene* mNextScene; // 遷移するシーン

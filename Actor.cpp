@@ -1,5 +1,5 @@
 #include "Actor.h"
-#include <vector>/
+#include <vector>
 #include "Game.h"
 #include "Component.h"
 #include "SpriteComponent.h"

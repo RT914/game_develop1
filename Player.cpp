@@ -1,5 +1,6 @@
 #include <Eigen/Dense>
 #include <stdio.h>
+#include <iostream>
 #include "Player.h"
 #include "Game.h"
 #include "Scene.h"
@@ -32,6 +33,37 @@ void Player::UpdateActor(float deltaTime)
     if (GetGame()->GetScene()->GetSceneName().compare("END") != 0)
     {
         // プレイヤーを移動させる
+        float scale = 30 * GetScale();
+        Vector2 pos = GetPosition();
+
+        std::cout << pos.x << std::endl;
+
+        pos.x += mRightMove * deltaTime;
+        pos.y += mDownMove * deltaTime;
+        if (pos.x < 0.0f)
+        {
+            pos.x = 0.0f;
+        }
+        else if (pos.x > Game::ScreenWidth - scale)
+        {
+            pos.x = Game::ScreenWidth - scale;
+        }
+        if (pos.y < 0.0f)
+        {
+            pos.y = 0.0f;
+        }
+        else if (pos.y > Game::ScreenHeight - scale)
+        {
+            pos.y = Game::ScreenHeight - scale;
+        }
+        SetPosition(pos);
+    }
+
+    /*
+    // ゲーム終了していたら動かさない
+    if (GetGame()->GetScene()->GetSceneName().compare("END") != 0)
+    {
+        // プレイヤーを移動させる
         Vector2 pos = GetPosition();
         pos.x += mRightMove * deltaTime;
         pos.y += mDownMove * deltaTime;
@@ -53,6 +85,7 @@ void Player::UpdateActor(float deltaTime)
         }
         SetPosition(pos);
     }
+    */
 
     /*
     // エネミーと衝突したら死亡

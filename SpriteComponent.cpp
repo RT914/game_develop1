@@ -7,8 +7,8 @@ SpriteComponent::SpriteComponent(class Actor* actor, int drawOrder)
     :Component(actor)
     , mTexture(nullptr)
     , mDrawOrder(drawOrder)
-    , mTexWidth(10)
-    , mTexHeight(10)
+    , mTexWidth(100)
+    , mTexHeight(100)
 {
     // 描画中のスプライトとして追加
     mActor->GetGame()->AddSprite(this);
@@ -44,14 +44,14 @@ void SpriteComponent::Draw(SDL_Renderer* renderer)
     else {
 
         // 描画色を白色に設定
-        SDL_SetRenderDrawColor(renderer, 255, 100, 5, 255);
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
         SDL_Rect player{
             // 大きさ、位置（左上座標）を設定
             static_cast<int>(mActor->GetPosition().x),
             static_cast<int>(mActor->GetPosition().y),
-            static_cast<int>(10 * mActor->GetScale()),
-            static_cast<int>(10 * mActor->GetScale())
+            static_cast<int>(30 * mActor->GetScale()), // playerの大きさ
+            static_cast<int>(30 * mActor->GetScale())  // playerの大きさ
         };
 
         // 描画
