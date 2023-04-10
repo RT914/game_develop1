@@ -7,6 +7,7 @@
 #include "SpriteComponent.h"
 #include "Component.h"
 #include "ColliderComponent.h"
+#include "Missile.h"
 
 Player::Player(Game* game)
     :Actor(game)
@@ -79,6 +80,8 @@ void Player::UpdateActor(float deltaTime)
             return;
         }
     }
+    */
+    
 
     // ミサイルを撃つ間隔を開ける
     if (!mIsCanShot)
@@ -90,7 +93,7 @@ void Player::UpdateActor(float deltaTime)
             mDeltaShotTime = 0.0f;
         }
     }
-    */
+    
 }
 
 // キーボード入力
@@ -129,7 +132,7 @@ void Player::ProcessKeyboard(const uint8_t* state)
         mRightMove += PlayerSpeed;
     }
 
-    /*
+    
     // ミサイルを撃つ
     if (state[SDL_SCANCODE_K])
     {
@@ -144,5 +147,5 @@ void Player::ProcessKeyboard(const uint8_t* state)
             missile->SetPosition(Vector2(pos.x, pos.y - 30.0f));
         }
     }
-    */
+    
 }

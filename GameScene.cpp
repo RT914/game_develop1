@@ -17,10 +17,11 @@ void GameScene::Start()
 {
     
     // エネミーをランダム作成
-    for (int i = 0; i < 30; i++)
+    for (int i = 0; i < 300; i++)
     {
         auto* enemy = new Enemy(mGame);
-        enemy->SetPosition(Vector2(Math::GetRand(100.0f, mGame->ScreenWidth - 100.0f), -100.0f));
+        // enemy->SetPosition(Vector2(Math::GetRand(100.0f, mGame->ScreenWidth - 100.0f), -100.0f)); // 敵の初期位置設定（縦）
+        enemy->SetPosition(Vector2(mGame->ScreenWidth + 100.0f, Math::GetRand(100.0f, mGame->ScreenHeight - 100.0f))); // 敵の初期位置設定（横）
         enemy->SetEnemySpeed(Math::GetRand(300.0f, 550.0f));
         enemy->SetScale(Math::GetRand(0.5f, 1.5f));
         // 数匹ごとに揺らす
@@ -32,6 +33,7 @@ void GameScene::Start()
         // 数匹ずつ動かす
         enemy->SetWaitTime(i / 3 * Math::GetRand(80.0f, 100.0f));
     }
+    
     
 }
 

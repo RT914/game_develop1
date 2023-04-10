@@ -80,6 +80,7 @@ void ScrollSpriteComponent::Draw(SDL_Renderer* renderer)
         &r_bottom);
     
     // 通常テクスチャの上部にもう一枚描画
+    // 1スクリーンサイズ分左にずらす
     SDL_Rect r_top;
     r_top.w = static_cast<int>(mTexWidth * mActor->GetScale());
     r_top.h = static_cast<int>(mTexHeight * mActor->GetScale());

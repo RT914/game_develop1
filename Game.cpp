@@ -38,8 +38,8 @@ bool Game::Initialize() {
 	// SDLウィンドウを作成
 	mWindow = SDL_CreateWindow(
 		"ball avoidance game", // ウィンドウのタイトル
-		100, // ウィンドウ左上隅のx座標
-		100, // ウィンドウ左上隅のy座標
+		-200, // ウィンドウ左上隅のx座標
+		50, // ウィンドウ左上隅のy座標
 		ScreenWidth, // ウィンドウの幅(width)
 		ScreenHeight, // ウィンドウの高さ(height)
 		0 // フラグ(設定しない時は0)

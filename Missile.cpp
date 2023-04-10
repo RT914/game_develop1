@@ -1,6 +1,5 @@
 #include "Missile.h"
 #include "Enemy.h"
-#include "BombEffect.h"
 #include "Game.h"
 #include "SpriteComponent.h"
 #include "ColliderComponent.h"
@@ -10,7 +9,7 @@ Missile::Missile(class Game* game)
 {
     // スプライト追加
     auto* sprite = new SpriteComponent(this, 90);
-    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "missile.png"));
+    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "kakinotane.png")); // ミサイルの画像をセット
     // コライダ追加
     mCollider = new ColliderComponent(this);
     mCollider->SetRadius(50.0f * GetScale());
@@ -23,7 +22,8 @@ void Missile::UpdateActor(float deltaTime)
     Actor::UpdateActor(deltaTime);
     // ミサイルを移動させる
     Vector2 pos = GetPosition();
-    pos.y -= mMissileSpeed * deltaTime;
+    pos.x += mMissileSpeed * deltaTime;
+    
     // 画面上部で破棄
     if (pos.y <= 50.0f)
     {
@@ -31,6 +31,7 @@ void Missile::UpdateActor(float deltaTime)
     }
     SetPosition(pos);
 
+    /*
     // エネミーと衝突したら破壊
     for (auto enemy : GetGame()->GetEnemies())
     {
@@ -44,4 +45,5 @@ void Missile::UpdateActor(float deltaTime)
             break;
         }
     }
+    */
 }

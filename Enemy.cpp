@@ -1,5 +1,6 @@
 #include "Enemy.h"
 #include <cmath>
+#include <iostream>
 #include "Game.h"
 #include "SpriteComponent.h"
 #include "ColliderComponent.h"
@@ -9,12 +10,13 @@ Enemy::Enemy(Game* game)
     , mEnemyMoveType(STRAIGHT)
     , mEnemySpeed(150.0f)
     , mTimeCount(0.0f)
+    , mEnemyShakeHeight(5.0f)
     , mEnemyShakeWidth(5.0f)
     , mWaitTime(0.0f)
 {
     // スプライト設定
     auto* sprite = new SpriteComponent(this);
-    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "enemy.png"));
+    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "pi-.png"));
     // コライダ追加
     mCollider = new ColliderComponent(this);
     mCollider->SetRadius(50.0f * GetScale());
@@ -42,18 +44,20 @@ void Enemy::UpdateActor(float deltaTime)
 
     // 移動処理
     Vector2 pos = GetPosition();
+    
     switch (mEnemyMoveType)
     {
     case STRAIGHT:
-        pos.y += mEnemySpeed * deltaTime;
+        pos.x -= mEnemySpeed * deltaTime;
         break;
     case SHAKE:
-        pos.x = mInitPosition->x + (sinf(mTimeCount / 10.0f) * mEnemyShakeWidth);
-        pos.y += mEnemySpeed * deltaTime;
+        pos.x -= mEnemySpeed * deltaTime;
+        pos.y = mInitPosition->y + (sinf(mTimeCount / 10.0f) * mEnemyShakeHeight);
         break;
     default:
         break;
     }
+    
     /*
     // 画面外に出たらゲームオーバー
     if (pos.y >= Game::ScreenHeight)

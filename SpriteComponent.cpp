@@ -47,7 +47,7 @@ void SpriteComponent::Draw(SDL_Renderer* renderer)
     else {
 
         // 描画色を白色に設定
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 
         SDL_Rect player{
             // 大きさ、位置（左上座標）を設定
