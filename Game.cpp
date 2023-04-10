@@ -11,6 +11,7 @@
 #include "ReadyScene.h"
 #include "GameScene.h"
 #include "Actor.h"
+#include "Enemy.h"
 #include "ScrollSpriteComponent.h"
 
 std::vector<int> inputkeyboard{0, 0};
@@ -70,8 +71,10 @@ void Game::InitScene()
 	auto* bgBack = new Actor(this);
 	bgBack->SetPosition(Vector2(ScreenWidth / 2, ScreenHeight / 2));
 	auto* bgBackSprite = new ScrollSpriteComponent(bgBack, 10);
-	bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "bubble.png"));
-	bgBackSprite->SetScrollSpeedY(100.0f); // 速度：100
+	bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "night.jfif"));
+	//bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "sky.jpg"));
+	bgBackSprite->SetScrollSpeedX(100.0f); // 速度：100
+	// bgBackSprite->SetScrollSpeedY(100.0f); // 速度：100
 
 	/*
 	auto* bgFront = new Actor(this);
@@ -149,7 +152,7 @@ void Game::UpdateScene()
 	mTicksCount = SDL_GetTicks();
 
 	
-	// ここ重要かもじれないから理解したい
+	// ここ重要かもしれないから理解したい
 	// アクタ更新処理
 	mUpdatingActors = true;
 	for (auto actor : mActors)
@@ -264,6 +267,22 @@ void Game::RemoveSprite(SpriteComponent* sprite)
 {
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
+}
+
+// エネミー追加
+void Game::AddEnemy(Enemy* enemy)
+{
+	mEnemies.emplace_back(enemy);
+}
+
+// エネミー削除
+void Game::RemoveEnemy(Enemy* enemy)
+{
+	auto iter = std::find(mEnemies.begin(), mEnemies.end(), enemy);
+	if (iter != mEnemies.end())
+	{
+		mEnemies.erase(iter);
+	}
 }
 
 void Game::ProcessInput() {

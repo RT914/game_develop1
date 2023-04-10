@@ -13,11 +13,15 @@ public:
     void Draw(SDL_Renderer* renderer) override;
 
 private:
+    float mScrollSpeedX; // X方向のスクロール速度
+    float mOffsetX;      // X方向のオフセット値
+
     float mScrollSpeedY; // Y方向のスクロール速度
     float mOffsetY;      // Y方向のオフセット値
 
 public:
     // Setter, Getter
+    void SetScrollSpeedX(float speed) { mScrollSpeedX = speed; }
     void SetScrollSpeedY(float speed) { mScrollSpeedY = speed; }
 
 };

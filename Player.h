@@ -23,6 +23,8 @@ private:
     float mRightMove; // 右方向への移動量
     float mDownMove;  // 下方向への移動量
     const float PlayerSpeed = 480.0f; // 移動速度
+    float mTexWidth; // テクスチャの幅
+    float mTexHeight; //テクスチャの高さ
 
     bool mIsCanShot;      // ミサイルを撃てるかどうか？
     float mDeltaShotTime; // ミサイルを撃ってからの時間

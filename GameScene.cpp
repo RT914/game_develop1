@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Math.h"
 #include "Player.h"
+#include "Enemy.h"
 
 GameScene::GameScene(class Game* game)
     :Scene(game)
@@ -14,7 +15,7 @@ GameScene::~GameScene()
 
 void GameScene::Start()
 {
-    /*
+    
     // エネミーをランダム作成
     for (int i = 0; i < 30; i++)
     {
@@ -31,7 +32,7 @@ void GameScene::Start()
         // 数匹ずつ動かす
         enemy->SetWaitTime(i / 3 * Math::GetRand(80.0f, 100.0f));
     }
-    */
+    
 }
 
 void GameScene::Update(float deltaTime)

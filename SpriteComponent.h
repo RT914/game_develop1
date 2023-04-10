@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "Component.h"
+#include "Player.h"
 
 // スプライトコンポーネントクラス
 // *描画を行うコンポーネントはこのクラスを継承する

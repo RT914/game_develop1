@@ -2,13 +2,14 @@
 #include "Game.h"
 #include "Actor.h"
 #include "Math.h"
+#include <iostream>
 
 SpriteComponent::SpriteComponent(class Actor* actor, int drawOrder)
     :Component(actor)
     , mTexture(nullptr)
     , mDrawOrder(drawOrder)
-    , mTexWidth(100)
-    , mTexHeight(100)
+    , mTexWidth(10)
+    , mTexHeight(10)
 {
     // 描画中のスプライトとして追加
     mActor->GetGame()->AddSprite(this);
@@ -27,8 +28,10 @@ void SpriteComponent::Draw(SDL_Renderer* renderer)
         SDL_Rect r;
         // 大きさ、位置（左上座標）を設定
         r.w = static_cast<int>(mTexWidth * mActor->GetScale());
+        // std::cout << r.w << std::endl;
         r.h = static_cast<int>(mTexHeight * mActor->GetScale());
         r.x = static_cast<int>(mActor->GetPosition().x - r.w / 2);
+        // std::cout << mActor->GetPosition().x << std::endl;
         r.y = static_cast<int>(mActor->GetPosition().y - r.h / 2);
         
         // 描画

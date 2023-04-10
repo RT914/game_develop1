@@ -24,9 +24,12 @@ public:
 	void AddSprite(class SpriteComponent* sprite);    // 描画中のスプライトを追加
 	void RemoveSprite(class SpriteComponent* sprite); // 描画中のスプライトを削除
 
+	void AddEnemy(class Enemy* enemy);    // エネミー追加
+	void RemoveEnemy(class Enemy* enemy); // エネミー削除
+
 	SDL_Texture* LoadTexture(const std::string& fileName); // テクスチャロード処理
 
-	constexpr static const float ScreenWidth = 1024.0f;  // スクリーン横幅
+	constexpr static const float ScreenWidth = 2048.0f;  // スクリーン横幅
 	constexpr static const float ScreenHeight = 768.0f; // スクリーン縦幅
 
 private:
@@ -67,10 +70,13 @@ private:
 	bool mGameClear;
 
 	// 画像パス
-	const std::string AssetsPath = ""; // Mac + CLion
+	//const std::string AssetsPath = "";
+	const std::string AssetsPath = "images\\"; // Win + VisualStudio
 
 	// プレイヤー
 	class Player* mPlayer;
+
+	std::vector<class Enemy*> mEnemies; // エネミー群
 
 public:
 	Scene* GetNextScene() const { return mNextScene; }

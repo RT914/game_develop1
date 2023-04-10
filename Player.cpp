@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Scene.h"
 #include "SpriteComponent.h"
+#include "Component.h"
 #include "ColliderComponent.h"
 
 Player::Player(Game* game)
@@ -13,11 +14,15 @@ Player::Player(Game* game)
     , mDownMove(0.0f)
     , mIsCanShot(false)
     , mDeltaShotTime(0.0f)
+    , mTexWidth(0.0f)
+    , mTexHeight(0.0f)
 {
     
     // スプライト設定
     auto* sprite = new SpriteComponent(this);
-    //sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "ship.png"));
+    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "player.png"));
+    mTexWidth = sprite->GetTexWidth();
+    mTexHeight = sprite->GetTexHeight();
     // コライダ追加
     mCollider = new ColliderComponent(this);
     mCollider->SetRadius(70.0f * GetScale());
@@ -33,59 +38,31 @@ void Player::UpdateActor(float deltaTime)
     if (GetGame()->GetScene()->GetSceneName().compare("END") != 0)
     {
         // プレイヤーを移動させる
-        float scale = 30 * GetScale();
+        float texwidth = mTexWidth;
+        float texheight = mTexHeight;
         Vector2 pos = GetPosition();
-
-        std::cout << pos.x << std::endl;
 
         pos.x += mRightMove * deltaTime;
         pos.y += mDownMove * deltaTime;
-        if (pos.x < 0.0f)
+        if (pos.x < texwidth / 2)
         {
-            pos.x = 0.0f;
+            pos.x = texwidth / 2;
         }
-        else if (pos.x > Game::ScreenWidth - scale)
+        else if (pos.x > Game::ScreenWidth - texwidth / 2)
         {
-            pos.x = Game::ScreenWidth - scale;
+            pos.x = Game::ScreenWidth - texwidth / 2;
         }
-        if (pos.y < 0.0f)
+        if (pos.y < texheight / 2)
         {
-            pos.y = 0.0f;
+            pos.y = texheight / 2;
         }
-        else if (pos.y > Game::ScreenHeight - scale)
+        else if (pos.y > Game::ScreenHeight - texheight / 2)
         {
-            pos.y = Game::ScreenHeight - scale;
+            pos.y = Game::ScreenHeight - texheight / 2;
         }
         SetPosition(pos);
     }
 
-    /*
-    // ゲーム終了していたら動かさない
-    if (GetGame()->GetScene()->GetSceneName().compare("END") != 0)
-    {
-        // プレイヤーを移動させる
-        Vector2 pos = GetPosition();
-        pos.x += mRightMove * deltaTime;
-        pos.y += mDownMove * deltaTime;
-        if (pos.x < 25.0f)
-        {
-            pos.x = 25.0f;
-        }
-        else if (pos.x > Game::ScreenWidth - 25.0f)
-        {
-            pos.x = Game::ScreenWidth - 25.0f;
-        }
-        if (pos.y < 25.0f)
-        {
-            pos.y = 25.0f;
-        }
-        else if (pos.y > Game::ScreenHeight - 25.0f)
-        {
-            pos.y = Game::ScreenHeight - 25.0f;
-        }
-        SetPosition(pos);
-    }
-    */
 
     /*
     // エネミーと衝突したら死亡
@@ -137,6 +114,19 @@ void Player::ProcessKeyboard(const uint8_t* state)
     if (state[SDL_SCANCODE_W])
     {
         mDownMove -= PlayerSpeed;
+    }
+
+    if (state[SDL_SCANCODE_UP]) {
+        mDownMove -= PlayerSpeed;
+    }
+    if (state[SDL_SCANCODE_LEFT]) {
+        mRightMove -= PlayerSpeed;
+    }
+    if (state[SDL_SCANCODE_DOWN]) {
+        mDownMove += PlayerSpeed;
+    }
+    if (state[SDL_SCANCODE_RIGHT]) {
+        mRightMove += PlayerSpeed;
     }
 
     /*
