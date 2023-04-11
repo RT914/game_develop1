@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "SpriteComponent.h"
 #include "ColliderComponent.h"
+#include "ExplosionEffect.h"
 
 Missile::Missile(class Game* game)
     :Actor(game)
@@ -31,8 +32,8 @@ void Missile::UpdateActor(float deltaTime)
     }
     SetPosition(pos);
 
-    /*
-    // エネミーと衝突したら破壊
+    
+    // エネミーとの衝突判定
     for (auto enemy : GetGame()->GetEnemies())
     {
         if (Intersect(*mCollider, *(enemy->GetCollider())))
@@ -40,10 +41,11 @@ void Missile::UpdateActor(float deltaTime)
             SetState(EDead);
             enemy->SetState(EDead);
             // エネミーの位置で爆発させる
-            auto* bomb = new BombEffect(GetGame());
-            bomb->SetPosition(Vector2(enemy->GetPosition()));
+            // enemy->GetScale();
+            auto* explosioneffect = new ExplosionEffect(GetGame());
+            explosioneffect->SetPosition(Vector2(enemy->GetPosition()));
             break;
         }
     }
-    */
+    
 }

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <Eigen/Dense>
+#include <time.h>
 #include "SDL_image.h"
 #include <vector>
 #include "Object.h"
@@ -71,7 +72,7 @@ void Game::InitScene()
 	auto* bgBack = new Actor(this);
 	bgBack->SetPosition(Vector2(ScreenWidth / 2, ScreenHeight / 2));
 	auto* bgBackSprite = new ScrollSpriteComponent(bgBack, 10);
-	bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "night.jfif"));
+	bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "sky.jpg"));
 	//bgBackSprite->SetTexture(LoadTexture(GetAssetsPath() + "sky.jpg"));
 	bgBackSprite->SetScrollSpeedX(100.0f); // 速度：100
 	// bgBackSprite->SetScrollSpeedY(100.0f); // 速度：100
@@ -92,12 +93,11 @@ void Game::RunLoop() {
 	mNextScene = mScene;
 	StartScene();
 	
-
 	while (mIsRunning) 
 	{
 		// シーン更新処理
 		UpdateScene();
-		cout << mScene->GetSceneName() << endl;
+		//cout << mScene->GetSceneName() << endl;
 		if (mScene->GetSceneName().compare(mNextScene->GetSceneName()) != 0)
 		{
 			delete mScene;
@@ -307,40 +307,6 @@ void Game::ProcessInput() {
 
 	mScene->ProcessInput(state);
 
-	// cout << mScene->GetSceneName() << endl;
-
-	/*
-	inputkeyboard[0] = 0;
-	inputkeyboard[1] = 0;
-
-	//WASD
-	if (state[SDL_SCANCODE_W]) {
-		inputkeyboard[1] -= 1;
-	}
-	if (state[SDL_SCANCODE_A]) {
-		inputkeyboard[0] -= 1;
-	}
-	if (state[SDL_SCANCODE_S]) {
-		inputkeyboard[1] += 1;
-	}
-	if (state[SDL_SCANCODE_D]) {
-		inputkeyboard[0] += 1;
-	}
-
-	//カーソルキー
-	if (state[SDL_SCANCODE_UP]) {
-		inputkeyboard[1] -= 1;
-	}
-	if (state[SDL_SCANCODE_LEFT]) {
-		inputkeyboard[0] -= 1;
-	}
-	if (state[SDL_SCANCODE_DOWN]) {
-		inputkeyboard[1] += 1;
-	}
-	if (state[SDL_SCANCODE_RIGHT]) {
-		inputkeyboard[0] += 1;
-	}
-	*/
 }
 
 void Game::GenerateOutput() {

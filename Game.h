@@ -73,10 +73,11 @@ private:
 	//const std::string AssetsPath = "";
 	const std::string AssetsPath = "images\\"; // Win + VisualStudio
 
-	// プレイヤー
-	class Player* mPlayer;
+	class Player* mPlayer; // プレイヤー
 
 	std::vector<class Enemy*> mEnemies; // エネミー群
+
+	class Timer* mTimer; // タイマー
 
 public:
 	Scene* GetNextScene() const { return mNextScene; }
@@ -84,9 +85,13 @@ public:
 	void SetGameClear(const bool isClear) { mGameClear = isClear; }
 	Scene* GetScene() const { return mScene; }
 	void SetScene(class Scene* scene) { mScene = scene; }
+	std::vector<class Enemy*> GetEnemies() { return mEnemies; }
+
 	std::string GetAssetsPath() const { return AssetsPath; }
 	void SetPlayer(class Player* player) { mPlayer = player; }
 	Player* GetPlayer() const { return mPlayer; }
+	void SetTimer(class Timer* timer) { mTimer = timer; }
+	Timer* GetTimer() const { return mTimer; }
 };
 
 #endif

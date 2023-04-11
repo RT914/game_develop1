@@ -8,8 +8,8 @@ SpriteComponent::SpriteComponent(class Actor* actor, int drawOrder)
     :Component(actor)
     , mTexture(nullptr)
     , mDrawOrder(drawOrder)
-    , mTexWidth(10)
-    , mTexHeight(10)
+    , mTexWidth(0)
+    , mTexHeight(0)
 {
     // 描画中のスプライトとして追加
     mActor->GetGame()->AddSprite(this);
