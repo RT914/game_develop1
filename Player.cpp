@@ -8,6 +8,9 @@
 #include "Component.h"
 #include "ColliderComponent.h"
 #include "Missile.h"
+#include "ExplosionEffect.h"
+#include "EndScene.h"
+#include "Enemy.h"
 
 Player::Player(Game* game)
     :Actor(game)
@@ -65,7 +68,7 @@ void Player::UpdateActor(float deltaTime)
     }
 
 
-    /*
+    
     // エネミーと衝突したら死亡
     for (auto enemy : GetGame()->GetEnemies())
     {
@@ -75,12 +78,12 @@ void Player::UpdateActor(float deltaTime)
             GetGame()->SetNextScene(new EndScene(GetGame()));
             SetState(EDead);
             // 宇宙船の位置で爆発エフェクト
-            auto* bomb = new BombEffect(GetGame());
-            bomb->SetPosition(Vector2(GetPosition()));
+            auto* explosion = new ExplosionEffect(GetGame(), 1);
+            explosion->SetPosition(Vector2(GetPosition()));
             return;
         }
     }
-    */
+    
     
 
     // ミサイルを撃つ間隔を開ける
@@ -133,7 +136,7 @@ void Player::ProcessKeyboard(const uint8_t* state)
     }
 
     
-    // ミサイルを撃つ
+    // 柿の種ミサイルを撃つ
     if (state[SDL_SCANCODE_K])
     {
         if (mIsCanShot)
@@ -142,10 +145,25 @@ void Player::ProcessKeyboard(const uint8_t* state)
             mIsCanShot = false;
             mDeltaShotTime = 0.0f;
             // ミサイル生成
-            auto* missile = new Missile(GetGame());
+            auto* missile = new Missile(GetGame(), 1);
             Vector2 pos = GetPosition();
             missile->SetPosition(Vector2(pos.x, pos.y - 30.0f));
         }
     }
     
+    // ハイチュウミサイルを撃つ
+    if (state[SDL_SCANCODE_L])
+    {
+        if (mIsCanShot)
+        {
+            // 撃つ間隔を開けるためフラグを変更
+            mIsCanShot = false;
+            mDeltaShotTime = 0.0f;
+            // ミサイル生成
+            auto* missile = new Missile(GetGame(), 2);
+            Vector2 pos = GetPosition();
+            missile->SetPosition(Vector2(pos.x, pos.y - 30.0f));
+        }
+    }
+   
 }

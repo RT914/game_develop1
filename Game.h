@@ -86,6 +86,7 @@ public:
 	Scene* GetNextScene() const { return mNextScene; }
 	void SetNextScene(class Scene* scene) { mNextScene = scene; }
 	void SetGameClear(const bool isClear) { mGameClear = isClear; }
+	bool GetGameClear() const { return mGameClear; }
 	Scene* GetScene() const { return mScene; }
 	void SetScene(class Scene* scene) { mScene = scene; }
 	std::vector<class Enemy*> GetEnemies() { return mEnemies; }

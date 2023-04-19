@@ -2,13 +2,22 @@
 #include "Game.h"
 #include "SpriteComponent.h"
 
-ExplosionEffect::ExplosionEffect(class Game* game)
+ExplosionEffect::ExplosionEffect(class Game* game, int num)
     :Actor(game)
     , mTimeCount(0.0f)
 {
     // スプライト設定
     auto* sprite = new SpriteComponent(this);
-    sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "kp_explosion.png"));
+    if (num == 1) { // プレイヤー
+        sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "boom.png"));
+    }
+    else if (num == 2) { // ピーナッツと柿の種
+        sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "kp_explosion.png"));
+    }
+    else {
+        sprite->SetTexture(GetGame()->LoadTexture(GetGame()->GetAssetsPath() + "kp_explosion.png"));
+    }
+    
     // 最初は大きさ0にする
     SetScale(0.0f);
 }

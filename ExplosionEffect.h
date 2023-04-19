@@ -4,7 +4,7 @@
 // 爆発エフェクト
 class ExplosionEffect : public Actor {
 public:
-    ExplosionEffect(class Game* game);
+    ExplosionEffect(class Game* game, int num);
     void UpdateActor(float deltaTime) override;
 
 private:
