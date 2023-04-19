@@ -1,10 +1,12 @@
 #include <iostream>
+#include <vector>
 #include "GameScene.h"
 #include "Game.h"
 #include "Math.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Timer.h"
+#include "Clock.h"
 
 GameScene::GameScene(class Game* game)
     :Scene(game)
@@ -25,6 +27,21 @@ void GameScene::Start()
     int start = SDL_GetTicks64();
     // std::cout << start << std::endl;
     mGame->GetTimer()->SetStartTime(start);
+
+    // クロッククラスの作成 for分でもできるかも
+    Clock* clock1 = new Clock(mGame);
+    Clock* clock2 = new Clock(mGame);
+    Clock* clock3 = new Clock(mGame);
+    Clock* clock4 = new Clock(mGame);
+    // Clock* clock5 = new Clock(mGame);
+    // Clock* clock6 = new Clock(mGame);
+
+    clock1->SetPosition(Vector2(100.0f, 100.0f));
+    clock2->SetPosition(Vector2(200.0f, 100.0f));
+    clock3->SetPosition(Vector2(300.0f, 100.0f));
+    clock4->SetPosition(Vector2(400.0f, 100.0f));
+    // clock5->SetPosition(Vector2(500.0f, 100.0f));
+    // clock6->SetPosition(Vector2(600.0f, 100.0f));
 
     // エネミーをランダム作成
     for (int i = 0; i < 30000; i++)

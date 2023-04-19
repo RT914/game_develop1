@@ -285,6 +285,12 @@ void Game::RemoveEnemy(Enemy* enemy)
 	}
 }
 
+// クロック追加
+void Game::AddClock(Clock* clock)
+{
+	mClocks.emplace_back(clock);
+}
+
 void Game::ProcessInput() {
 	SDL_Event event;
 	// キューにイベントがあれば繰り返す

@@ -27,6 +27,8 @@ public:
 	void AddEnemy(class Enemy* enemy);    // エネミー追加
 	void RemoveEnemy(class Enemy* enemy); // エネミー削除
 
+	void AddClock(class Clock* clock); // クロック追加
+
 	SDL_Texture* LoadTexture(const std::string& fileName); // テクスチャロード処理
 
 	constexpr static const float ScreenWidth = 2048.0f;  // スクリーン横幅
@@ -80,13 +82,14 @@ private:
 	class Timer* mTimer; // タイマー
 
 public:
+	std::vector<class Clock*> mClocks; // クロック群
 	Scene* GetNextScene() const { return mNextScene; }
 	void SetNextScene(class Scene* scene) { mNextScene = scene; }
 	void SetGameClear(const bool isClear) { mGameClear = isClear; }
 	Scene* GetScene() const { return mScene; }
 	void SetScene(class Scene* scene) { mScene = scene; }
 	std::vector<class Enemy*> GetEnemies() { return mEnemies; }
-
+	std::vector<class Clock*> GetClocks() { return mClocks; }
 	std::string GetAssetsPath() const { return AssetsPath; }
 	void SetPlayer(class Player* player) { mPlayer = player; }
 	Player* GetPlayer() const { return mPlayer; }
